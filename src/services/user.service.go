@@ -65,6 +65,7 @@ func GetAllUsers() ([]*dtos.UserDto, error) {
 		userDto.Email = user.Email
 		userDto.FirstName = user.FirstName
 		userDto.LastName = user.LastName
+		userDto.Role = user.Role
 		returnUsers = append(returnUsers, &userDto)
 	}
 
@@ -97,6 +98,7 @@ func GetUserByID(userID string) (*dtos.UserDto, error) {
 	userDto.Email = user.Email
 	userDto.FirstName = user.FirstName
 	userDto.LastName = user.LastName
+	userDto.Role = user.Role
 
 	return &userDto, nil
 }
