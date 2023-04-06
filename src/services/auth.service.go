@@ -4,6 +4,8 @@ import (
 	"errors"
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"github.com/jaimy-monsuur/movie-api/src/dtos"
+	"github.com/jaimy-monsuur/movie-api/src/models"
 	"os"
 	"strings"
 	"time"
@@ -153,4 +155,21 @@ func isAdmin(claims *JwtClaims) bool {
 		return true
 	}
 	return false
+}
+
+func MakeLoginDTO(token string, user *models.User) dtos.LoginDTO {
+
+	var userDto = dtos.UserDto{
+		ID:        user.ID.String(),
+		FirstName: user.FirstName,
+		LastName:  user.LastName,
+		Email:     user.Email,
+		Role:      user.Role,
+	}
+
+	var loginDto = dtos.LoginDTO{}
+	loginDto.Token = token
+	loginDto.User = userDto
+
+	return loginDto
 }

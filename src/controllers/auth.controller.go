@@ -53,5 +53,7 @@ func LoginUser(context *gin.Context) {
 		return
 	}
 
-	Responses.HandleOkResponse(context, "Login Successful", accessToken)
+	loginDTO := services.MakeLoginDTO(accessToken, userExists)
+
+	Responses.HandleOkResponse(context, "Login Successful", loginDTO)
 }
