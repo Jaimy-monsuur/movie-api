@@ -13,6 +13,11 @@ func Auth() gin.HandlerFunc {
 
 	return func(context *gin.Context) {
 
+		context.Writer.Header().Set("Access-Control-Allow-Origin", "*")
+		context.Writer.Header().Set("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization")
+		context.Writer.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE, OPTIONS")
+		context.Writer.Header().Set("Access-Control-Allow-Credentials", "true")
+
 		bearerToken := context.GetHeader("Authorization")
 		if bearerToken == "" {
 			exceptions.HandleBadRequestException(context, errors.New("bearer token is required"))
@@ -33,6 +38,11 @@ func Auth() gin.HandlerFunc {
 func AdminAuth() gin.HandlerFunc {
 
 	return func(context *gin.Context) {
+
+		context.Writer.Header().Set("Access-Control-Allow-Origin", "*")
+		context.Writer.Header().Set("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization")
+		context.Writer.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE, OPTIONS")
+		context.Writer.Header().Set("Access-Control-Allow-Credentials", "true")
 
 		bearerToken := context.GetHeader("Authorization")
 		if bearerToken == "" {
