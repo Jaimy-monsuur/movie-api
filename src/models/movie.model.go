@@ -12,4 +12,5 @@ type Movie struct {
 	AVGRating   float64  `gorm:"default:0"`
 	NrOfRatings int      `gorm:"default:0"`
 	Reviews     []Review `gorm:"foreignKey:MovieID"`
+	Url         string
 }

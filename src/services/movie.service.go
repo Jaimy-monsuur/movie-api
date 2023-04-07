@@ -28,6 +28,7 @@ func CreateMovie(movie dtos.CreateMovie) (*models.Movie, *interfaces.ServiceErro
 		Plot:     movie.Plot,
 		Language: movie.Language,
 		Length:   movie.Length,
+		Url:      movie.Url,
 	}
 
 	result := config.DB.Create(&newMovie)
@@ -46,7 +47,7 @@ func CreateMovie(movie dtos.CreateMovie) (*models.Movie, *interfaces.ServiceErro
 func GetAllMovies() ([]*models.Movie, error) {
 	var allMovies []*models.Movie
 
-	err := config.DB.Select("id", "title", "year", "director", "actors", "plot", "language", "length", "created_at", "updated_at").Find(&allMovies).Error
+	err := config.DB.Select("id", "title", "year", "director", "actors", "plot", "language", "length", "created_at", "updated_at", "url").Find(&allMovies).Error
 
 	if err != nil {
 		return nil, err
@@ -82,6 +83,7 @@ func UpdateMovie(id string, movie dtos.UpdateMovie) (*models.Movie, error) {
 	movieToUpdate.Plot = movie.Plot
 	movieToUpdate.Language = movie.Language
 	movieToUpdate.Length = movie.Length
+	movieToUpdate.Url = movie.Url
 
 	err = config.DB.Save(&movieToUpdate).Error
 

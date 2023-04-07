@@ -11,6 +11,7 @@ type GetMovie struct {
 	Plot        string  `json:"plot"`
 	AVGRating   float64 `json:"avg_rating"`
 	NrOfRatings int     `json:"nr_of_ratings"`
+	Url         string  `json:"url"`
 }
 
 type CreateMovie struct {
@@ -21,6 +22,7 @@ type CreateMovie struct {
 	Director string `json:"director"`
 	Actors   string `json:"actors"`
 	Plot     string `json:"plot"`
+	Url      string `json:"url"`
 }
 
 type UpdateMovie struct {
@@ -31,6 +33,7 @@ type UpdateMovie struct {
 	Director string `json:"director"`
 	Actors   string `json:"actors"`
 	Plot     string `json:"plot"`
+	Url      string `json:"url"`
 }
 
 type DeleteMovie struct {
