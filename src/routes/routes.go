@@ -54,5 +54,6 @@ func ReviewRoutes(router *gin.Engine) {
 		reviewRouter.PUT("/:id", middlewares.Auth(), controllers.UpdateReview)
 		reviewRouter.DELETE("/:id", middlewares.AdminAuth(), controllers.DeleteReview)
 		reviewRouter.GET("/:id", middlewares.Auth(), controllers.GetReviewByMovieId)
+		reviewRouter.GET("/review/:id", middlewares.Auth(), controllers.GetReviewById)
 	}
 }

@@ -161,3 +161,32 @@ func DeleteReview(context *gin.Context) {
 
 	Responses.HandleOkResponse(context, "Review Deleted", nil)
 }
+
+// GetReviewById godoc
+// @Summary Get a review by id
+// @Description Get a review by id
+// @Tags Review
+// @Accept json
+// @Produce json
+// @Param id path int true "Review ID"
+// @Success 200 {object} dtos.SuccessResponseDto{data=models.Review} "review returned"
+// @Failure 404 {object} dtos.FailedResponseDto "review not found"
+// @Failure 500 {object} dtos.FailedResponseDto "unexpected internal server error"
+// @Router /reviews/{id} [get]
+func GetReviewById(context *gin.Context) {
+	id := dtos.EntityID{}
+
+	if err := context.BindUri(&id); err != nil {
+		exceptions.HandleValidationException(context, err)
+		return
+	}
+
+	review, err := services.GetReviewById(id.ID)
+
+	if err != nil {
+		exceptions.HandleNotFoundException(context, err)
+		return
+	}
+
+	Responses.HandleOkResponse(context, "Review returned", review)
+}

@@ -141,3 +141,15 @@ func DeleteReview(ID string) *interfaces.ServiceError {
 
 	return nil
 }
+
+func GetReviewById(ID string) (*models.Review, error) {
+	var review models.Review
+
+	err := config.DB.First(&review, "ID = ?", ID).Error
+
+	if err != nil {
+		return nil, err
+	}
+
+	return &review, nil
+}
