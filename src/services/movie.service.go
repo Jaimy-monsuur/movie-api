@@ -53,6 +53,12 @@ func GetAllMovies() ([]*models.Movie, error) {
 		return nil, err
 	}
 
+	for movie := range allMovies {
+		for review := range allMovies[movie].Reviews {
+			allMovies[movie].Reviews[review].User.Password = ""
+		}
+	}
+
 	return allMovies, nil
 }
 
@@ -62,6 +68,10 @@ func GetMovieById(ID string) (*models.Movie, error) {
 	if err := config.DB.Preload("Reviews").Preload("Reviews.User").First(&movie, "id = ?", ID).Error; err != nil {
 
 		return nil, err
+	}
+
+	for review := range movie.Reviews {
+		movie.Reviews[review].User.Password = ""
 	}
 
 	return &movie, nil
