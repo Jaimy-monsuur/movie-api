@@ -47,7 +47,7 @@ func CreateMovie(movie dtos.CreateMovie) (*models.Movie, *interfaces.ServiceErro
 func GetAllMovies() ([]*models.Movie, error) {
 	var allMovies []*models.Movie
 
-	err := config.DB.Preload("Reviews").Find(&allMovies).Error
+	err := config.DB.Preload("Reviews").Preload("Reviews.User").Find(&allMovies).Error
 
 	if err != nil {
 		return nil, err
@@ -59,7 +59,7 @@ func GetAllMovies() ([]*models.Movie, error) {
 func GetMovieById(ID string) (*models.Movie, error) {
 	var movie models.Movie
 
-	if err := config.DB.Preload("Reviews").First(&movie, "id = ?", ID).Error; err != nil {
+	if err := config.DB.Preload("Reviews").Preload("Reviews.User").First(&movie, "id = ?", ID).Error; err != nil {
 
 		return nil, err
 	}
